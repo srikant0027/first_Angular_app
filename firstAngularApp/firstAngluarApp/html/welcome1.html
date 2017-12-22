@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Form Filling</title>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="../js/controller/personController.js"></script>
+		</head>
+		<body ng-app="myApp">
+			<div ng-controller="headerCtrl" class="container">
+  				<button ng-click="navigateToUrl('/student')">Student Form</button> 
+  				<button ng-click="navigateToUrl('/details')">Press here for details</button>
+  				
+  			</div><br><br>
+  				<div ng-view> </div>
+		</body>
+	</html>
