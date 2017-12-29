@@ -1,10 +1,6 @@
 angular.module('myApp', ["ngRoute"])
 .config(function($routeProvider) {
     $routeProvider
-.when("/details", {
-        templateUrl : "../html/submit.html",
-        controller : "detailsCtrl"
-    })
 .when("/student", {
         templateUrl : "../html/student.html",
         controller : "personCtrl"
@@ -15,31 +11,55 @@ angular.module('myApp', ["ngRoute"])
     })
 .otherwise({redirectTo:"/student"})
 })
-.controller('personCtrl', function($scope) {
-	$scope.gender = " ",
-    $scope.firstName = "Srikant",
-    $scope.lastName = "Gurram",
-    $scope.fullName = function() {
-        return $scope.firstName + " " + $scope.lastName;
-    }
+.controller('personCtrl', function($scope,Data) {
+    $scope.basicForm = {};
+    $scope.submitForm = function(obj) {
+    	console.log(obj);
+    	Data.setSharedObj(obj);
+    	Data.navigateToUrl('/ty');
+    	 }
 })
-.controller("detailsCtrl", function ($scope) {
-    $scope.msg = " ";
+.controller("repeatCtrl", function ($scope) {
+    $scope.records = [
+    "",
+    "India",
+    "Sri Lanka",
+    "Bangladesh",
+    "Nepal",
+    "Afghanistan",
+    "Pakistan",
+    "China"
+    ] 
 })
-.controller("tyCtrl", function ($scope) {
-    $scope.msg = " ";
+.controller("tyCtrl", function ($scope,Data) {
+    console.log('tyCtrl');
+    console.log(Data.getSharedObj());
+    $scope.tyForm = Data.getSharedObj();
 })
-.controller("headerCtrl", function ($scope,$location) {
-	
+.controller("headerCtrl", function ($scope,Data) {
 	//$location.path('/student');
     $scope.navigateToUrl=function(url){
-    	$location.path(url)
+    	Data.navigateToUrl(url);
     }
 }
 )
-.controller('validateCtrl', function($scope) {
-    $scope.firstName = "Srikant Gurram";
-    $scope.email = "srikant.gurram@gmail.com";
-    $scope.country="India";
-})
-; 
+.controller("phoneCtrl", function($scope){
+	$scope.phoneNumber=/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
+	}
+	)
+.factory('Data', function($location){
+    var data = {
+    	sharedObj:{}
+    }
+    return {
+    	getSharedObj:function(){
+    		return  data.sharedObj;
+    	},
+    	setSharedObj:function(sharedObj){
+    		data.sharedObj =  sharedObj;
+    	},
+    	navigateToUrl:function(url){
+			$location.path(url)
+    	}
+    }
+});

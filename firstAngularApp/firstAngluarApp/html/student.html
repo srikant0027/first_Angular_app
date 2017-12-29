@@ -5,41 +5,43 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>.error {color: red;}</style>
     </head>
     <div class="container">
-    <form name="myForm" novalidate>  
-        <p>First Name:</p> <input type="text" name="firstName" ng-model="firstName" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12" >
+      <form name="myForm" novalidate>
+        <p><h3>SIGN-UP HERE</h3></p><br><br> 
+        <p>First Name:</p> <input type="text" name="firstName" ng-model="basicForm.firstName" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12" >
         <p class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><span style="color:red" ng-show="myForm.firstName.$dirty && myForm.firstName.$invalid">
         <span ng-show="myForm.firstName.$error.required">First Name is required.</span>
         </span></p><br><br>
-				<p>Last Name:</p> <input type="text" name="lastName" ng-model="lastName" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12">
+				<p>Last Name:</p> <input type="text" name="lastName" ng-model="basicForm.lastName" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12">
         <p class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><span style="color:red" ng-show="myForm.lastName.$dirty && myForm.lastName.$invalid">
         <span ng-show="myForm.lastName.$error.required">Last Name is required.</span>
-        </span></p><br><br>
-				<p class="col-md-8 col-sm-12 col-lg-4 col-xs-12">Full Name: {{fullName()}}</p><br><br>
+        </span></p><br>
+        {{basicForm.firstName + " " + basicForm.lastName}}</p><p> </p><br>
   					<p>Gender:
-  					<input type="radio" ng-model="gender" value="Male" name="Male" >Male
-  					<input type="radio" ng-model="gender" value="Female" name="Female">Female<br><br>
-  					{{gender}}</p><br>
-            <p>Contact Number:</p>
-            <input type="text" ng-model="phoneNumber" class="col-md-8 col-sm-12 col-lg-4 col-xs-12"><br><br>
-            <p>Email:</p><input type="email" name="email" ng-model="email" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12">
+            <input type="radio" ng-model="basicForm.gender" value="Male" name="Male" >Male
+            <input type="radio" ng-model="basicForm.gender" value="Female" name="Female">Female<br><br>
+            {{basicForm.gender}}</p><br>
+            <p >Contact Number:</p>
+            <input type="text" ng-model="basicForm.phoneNumber" ng-controller="phoneCtrl" name="phoneNumber" ng-pattern="phoneNumber" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12"><br><br>
+            {{basicForm.phoneNumber}}
+             <br><span class="error" ng-show="myForm.phoneNumber.$error.pattern">Please match pattern [+91-036-78658 || 91-036-78658]</span><br><br>
+            <p>Email:</p><input type="email" name="email" ng-model="basicForm.email" required class="col-md-8 col-sm-12 col-lg-4 col-xs-12">
             <p class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
             <span ng-show="myForm.email.$error.required">Email is required.</span>
             <span ng-show="myForm.email.$error.email">Invalid email address.</span></p>
             </span></p><br><br>
-  					<p class="col-md-12 col-sm-12 col-lg-12 col-xs-12">Select your country:
-  						<select name="country" ng-model="country" required>
-    						<option value="">
-   						 	<option value="India">India
-    						<option value="Pakistan">Pakistan
-    						<option value="Sri Lanka">Sri Lanka
+            {{basicForm.email}}<br><br>
+  					<p class="col-md-12 col-sm-12 col-lg-12 col-xs-12" ng-controller="repeatCtrl">Select your country:
+  						<select name="country" ng-model="basicForm.country" required>
+    						<option ng-repeat="x in records">{{x}}</option>
  						 </select></p>
+              <p>{{basicForm.country}}<br><br></p>
              <p class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><span style="color:red" ng-show="myForm.country.$dirty && myForm.country.$invalid">*Please Select country</span><br><br></p>
- 						 {{country}}<br><br>
           <div ng-controller="headerCtrl">
-          <button ng-click="navigateToUrl('/ty')" ng-disabled="myForm.firstName.$dirty && myForm.firstName.$invalid ||  myForm.email.$dirty && myForm.email.$invalid || myForm.email.$pristine || myForm.lastName.$dirty && myForm.lastName.$invalid ">Submit</button>
+          <button ng-click="submitForm(basicForm)" ng-disabled="myForm.firstName.$dirty && myForm.firstName.$invalid ||  myForm.email.$dirty && myForm.email.$invalid || myForm.email.$pristine || myForm.lastName.$dirty && myForm.lastName.$invalid || myForm.firstName.$pristine || myForm.lastName.$pristine || myForm.country.$dirty && myForm.country.$invalid || myForm.country.$pristine || myForm.phoneNumber.$dirty && myForm.phoneNumber.$invalid || myForm.phoneNumber.$pristine ">Submit</button>
           </div>  
-          </form><br>
-      </option>
-    </html>
+      </form><br>
+    </div>
+  </html>

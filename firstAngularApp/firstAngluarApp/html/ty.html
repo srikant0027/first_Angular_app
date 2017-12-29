@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-  <html ng-app="myApp">
+  <html>
     <head>  
     	<title>After Submission2</title>
     </head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<h1  class="container">THANK YOU!<h1>
-		
+    		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<h3  class="container">THANK YOU!</h3><br><br>
+	<div ng-app="myApp" class="container">	
+			<div >
+				<p>The Submitted Details are:</p>
+					<p>First Name: {{tyForm.firstName}}</p>
+					<p>Last Name:{{tyForm.lastName}}</p>
+					<p>Gender:{{tyForm.gender}}</p>
+					<p>Contact Number:{{tyForm.phoneNumber}}</p>
+					<p>Email ID:{{tyForm.email}}</p>
+					<p>Country:{{tyForm.country}}</p>
+			</div>
+	</div>
 	</html>
